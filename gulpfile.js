@@ -1,6 +1,11 @@
 var Promise = require('es6-promise').Promise;
 //variables
-var gulp            = require('gulp'),
+var 
+    scss_src        = "assets/dev/scss",
+    css_dest        = "assets/css",
+    js_src          = "assets/dev/js",
+    js_dest         = "assets/js",
+    gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     postcss         = require('gulp-postcss'),
     autoprefixer    = require('autoprefixer'),
@@ -16,16 +21,16 @@ gulp.task('default',['watch']);
 gulp.task('build-css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
     var build_processors = [csswring];
-    return gulp.src('assets/scss/global.scss')
+    return gulp.src(scss_src + '/global.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(postcss(processors))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('assets/css'));
+    .pipe(gulp.dest(css_dest));
 });
 
 
 //watch
 gulp.task('watch',function(){
-    gulp.watch('assets/scss/**', ['build-css']);
+    gulp.watch(scss_src + '/**', ['build-css']);
 });

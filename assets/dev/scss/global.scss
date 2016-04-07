@@ -1,4 +1,9 @@
 //global scss
+html, body{padding:0; margin:0; width:100%; height:100%;}
 h1{
     color:olive;
+    font:bold 40px sans-serif;
+    background:rgba(olive,.2);
+    padding:3rem;
+    text-transform:uppercase;
 }
