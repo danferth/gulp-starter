@@ -1,9 +1,8 @@
 var Promise = require('es6-promise').Promise;
 //variables
 var 
-    dev_src         = "assets/dev",
-    css_dest        = "assets/css",
-    js_dest         = "assets/js",
+    src             = "assets/dev",
+    dest            = "assets/pro",
     gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     postcss         = require('gulp-postcss'),
@@ -22,24 +21,25 @@ gulp.task('default',['watch']);
 gulp.task('build-css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
     var build_processors = [csswring];
-    return gulp.src(dev_src + '/scss/global.scss')
+    return gulp.src(src + '/scss/global.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(postcss(processors))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(css_dest));
+    .pipe(gulp.dest(dest + '/css'));
 });
 
 gulp.task('build-js', function(){
-    return gulp.src([dev_src+'/lib/**',dev_src+'/js/**'])
+    return gulp.src([src+'/lib/**',src+'/js/**'])
         .pipe(concat('site.js'))
+        .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(js_dest));
+        .pipe(gulp.dest(dest + '/js'));
 });
 
 
 //watch
 gulp.task('watch',function(){
-    gulp.watch(dev_src + '/scss/**', ['build-css']);
+    gulp.watch(src + '/scss/**', ['build-css']);
 });
