@@ -1,4 +1,6 @@
 //global scss
+$white: white;
+$olive: olive;
 html, body{padding:0; margin:0; width:100%; height:100%;}
 h1{
     color:olive;
@@ -9,5 +11,5 @@ h1{
 }
 p{
     margin:0 2rem;
-    color:darken(white,80%)
+    color:darken($white,90%);
 }

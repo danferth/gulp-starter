@@ -12,7 +12,8 @@ var
     concat          = require('gulp-concat'),
     uglify          = require('gulp-uglify'),
     filesize        = require('gulp-filesize'),
-    jshint          = require('gulp-jshint');
+    jshint          = require('gulp-jshint'),
+    sasslint        = require('gulp-sass-lint');
     
 
 //default task
@@ -25,6 +26,8 @@ gulp.task('build-css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
     var build_processors = [csswring];
     return gulp.src(src + '/scss/global.scss')
+    .pipe(sasslint())
+    .pipe(sasslint.format())
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(postcss(processors))
