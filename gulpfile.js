@@ -2,7 +2,7 @@ var Promise = require('es6-promise').Promise;
 //variables
 var 
     src             = "assets/dev",
-    dest            = "assets/pro",
+    dest            = "assets/build",
     gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     postcss         = require('gulp-postcss'),

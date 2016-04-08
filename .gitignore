@@ -1,5 +1,4 @@
 .c9/**
 .sass-cache/**
 node_modules/**
-assets/pro/css/**
-assets/pro/js/**
+assets/build/**/**
