@@ -11,7 +11,8 @@ var
     sourcemaps      = require('gulp-sourcemaps'),
     concat          = require('gulp-concat'),
     uglify          = require('gulp-uglify'),
-    gutil            = require('gulp-util');
+    filesize        = require('gulp-filesize'),
+    jshint          = require('gulp-jshint');
     
 
 //default task
@@ -19,6 +20,7 @@ var
 gulp.task('default',['watch']);
 
 //stylesheet
+//sourcemaps | sass | prefix | minimize | filesize
 gulp.task('build-css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
     var build_processors = [csswring];
@@ -27,21 +29,37 @@ gulp.task('build-css',function(){
     .pipe(sass())
     .pipe(postcss(processors))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(dest + '/css'));
+    .pipe(gulp.dest(dest + '/css'))
+    .pipe(filesize());
 });
 
+//javascript
+
+//concat | jshint | filesize
+gulp.task('js', function(){
+    return gulp.src([src+'/lib/**',src+'/js/**'])
+        .pipe(concat('site.js'))
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(gulp.dest(dest + '/js'))
+        .pipe(filesize())
+});
+
+//concat | sourcemaps | minimize | filesize
 gulp.task('build-js', function(){
     return gulp.src([src+'/lib/**',src+'/js/**'])
         .pipe(concat('site.js'))
+        .pipe(filesize())
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(dest + '/js'));
+        .pipe(gulp.dest(dest + '/js'))
+        .pipe(filesize());
 });
 
 
 //watch
 gulp.task('watch',function(){
     gulp.watch(src + '/scss/**', ['build-css']);
-    gutil.log('style that shit bro!');
+    gulp.watch([src + 'lib/**/**', src + '/js**/**'],['js']);
 });
