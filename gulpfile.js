@@ -10,7 +10,8 @@ var
     csswring        = require('csswring'),
     sourcemaps      = require('gulp-sourcemaps'),
     concat          = require('gulp-concat'),
-    uglify          = require('gulp-uglify');
+    uglify          = require('gulp-uglify'),
+    gutil            = require('gulp-util');
     
 
 //default task
@@ -42,4 +43,5 @@ gulp.task('build-js', function(){
 //watch
 gulp.task('watch',function(){
     gulp.watch(src + '/scss/**', ['build-css']);
+    gutil.log('style that shit bro!');
 });
