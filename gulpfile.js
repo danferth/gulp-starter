@@ -13,7 +13,9 @@ var
     uglify          = require('gulp-uglify'),
     filesize        = require('gulp-filesize'),
     jshint          = require('gulp-jshint'),
-    sasslint        = require('gulp-sass-lint');
+    sasslint        = require('gulp-sass-lint'),
+    imagemin        = require('gulp-imagemin'),
+    pngquant        = require('imagemin-pngquant');
     
 
 //default task
@@ -59,6 +61,20 @@ gulp.task('build-js', function(){
         .pipe(gulp.dest(dest + '/js'))
         .pipe(filesize());
 });
+
+//images
+gulp.task('image', function(){
+    return gulp.src(src + '/img/**')
+    .pipe(imagemin({
+        progressive: true,
+        svgPlugins: [{removeViewBox: false}],
+        use: [pngquant()]
+    }))
+    .pipe(gulp.dest(dest + "/images"))
+});
+
+
+
 
 
 //watch
