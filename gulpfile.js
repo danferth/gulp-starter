@@ -16,7 +16,8 @@ var
     del             = require('del'),
     argv            = require('yargs').argv,
     colors          = require('colors'),
-    gulpif          = require('gulp-if');
+    gulpif          = require('gulp-if'),
+    changed         = require('gulp-changed');
 
 //========options=========================================================
 var src         = "assets/dev",
@@ -67,6 +68,7 @@ gulp.task('clean', function(){
 gulp.task('css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
     return gulp.src(css_src)
+    .pipe(changed(css_dest))
     .pipe(sasslint())
     .pipe(sasslint.format())
     .pipe(sourcemaps.init())
@@ -112,6 +114,10 @@ gulp.task('watch',function(){
     gulp.watch([js_lib_src + '/**/**', js_src + '/**/**'],['js']);
 });
 
+
+
+//=========BUILD========================================================
+//gulp.task('build',['css', 'js --production', 'image']);
 //======TEST=========================================================
 
 gulp.task('testme', function(){
