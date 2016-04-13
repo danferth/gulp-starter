@@ -1,23 +1,23 @@
 var Promise = require('es6-promise').Promise;
 var 
     gulp            = require('gulp'),
-    sass            = require('gulp-sass'),
-    postcss         = require('gulp-postcss'),
-    autoprefixer    = require('autoprefixer'),
-    csswring        = require('csswring'),
-    sourcemaps      = require('gulp-sourcemaps'),
-    concat          = require('gulp-concat'),
-    uglify          = require('gulp-uglify'),
+    colors          = require('colors'),
     filesize        = require('gulp-filesize'),
-    jshint          = require('gulp-jshint'),
-    sasslint        = require('gulp-sass-lint'),
-    imagemin        = require('gulp-imagemin'),
-    pngquant        = require('imagemin-pngquant'),
     del             = require('del'),
     argv            = require('yargs').argv,
-    colors          = require('colors'),
     gulpif          = require('gulp-if'),
-    changed         = require('gulp-changed');
+    changed         = require('gulp-changed'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    postcss         = require('gulp-postcss'),
+    sass            = require('gulp-sass'),
+    sasslint        = require('gulp-sass-lint'),
+    autoprefixer    = require('autoprefixer'),
+    csswring        = require('csswring'),
+    concat          = require('gulp-concat'),
+    uglify          = require('gulp-uglify'),
+    jshint          = require('gulp-jshint'),
+    imagemin        = require('gulp-imagemin'),
+    pngquant        = require('imagemin-pngquant');
 
 //========options=========================================================
 var src         = "assets/dev",
@@ -47,12 +47,14 @@ gulp.task('default',['watch']);
 //=================================================================================
 gulp.task('help', function(){
   console.log("=============================================================".bold.green);
-  console.log("clean           = delete contents of build folder".red);
-  console.log("css             = sourcemaps | sass | prefix | minimize | filesize".cyan);
-  console.log("js              = concat | jshint | filesize".yellow);
-  console.log("js --production = concat | sourcemaps | minimize | filesize".yellow);
-  console.log("images          = optimize images and save to build dir".grey);
-  console.log("watch (default) = build-css && js".bold.green);
+  console.log("clean              = delete contents of build folder".red);
+  console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
+  console.log("js                 = concat | jshint | filesize".yellow);
+  console.log("js --production    = concat | sourcemaps | minimize | filesize".yellow);
+  console.log("image              = optimize images and save to build dir".magenta);
+  console.log("watch (default)    = css && js".bold.green);
+  console.log("build              = css, js --production & image".grey);
+  console.log("build --production = css, js --production & image".inverse);
   console.log("=============================================================".bold.yellow);
 });
 
