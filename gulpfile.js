@@ -14,9 +14,10 @@ var
     imagemin        = require('gulp-imagemin'),
     pngquant        = require('imagemin-pngquant'),
     del             = require('del'),
-    args            = require('yargs').argv;
+    args            = require('yargs').argv,
+    colors          = require('colors');
 
-//========options========
+//========options=========================================================
 var src         = "assets/dev",
     dest        = "assets/build",
     
@@ -32,20 +33,21 @@ var src         = "assets/dev",
     image_src   = src + "/img",
     image_dest  = dest + "/images";
 
-//========default task========
+//========default task=========================================================
 gulp.task('default',['watch']);
 
-
-//========================
-//==========help==========
-//========================
+//=================================================================================
+//==========help===================================================================
+//=================================================================================
 gulp.task('help', function(){
-    console.log("clean = delete contents of build folder");
-    console.log("build-css = sourcemaps | sass | prefix | minimize | filesize");
-    console.log("js = concat | jshint | filesize");
-    console.log("build-js = concat | sourcemaps | minimize | filesize");
-    console.log("images = optimize images and save to build dir");
-    console.log("watch = build-css && js");
+    console.log("=============================================================".bold.green);
+    console.log("clean = delete contents of build folder".red);
+    console.log("build-css = sourcemaps | sass | prefix | minimize | filesize".cyan);
+    console.log("js = concat | jshint | filesize".yellow);
+    console.log("build-js = concat | sourcemaps | minimize | filesize".yellow);
+    console.log("images = optimize images and save to build dir".grey);
+    console.log("watch (default) = build-css && js".bold.green);
+    console.log("=============================================================".bold.yellow);
 });
 
 //clean
@@ -55,7 +57,7 @@ gulp.task('clean', function(){
         ]);
 });
 
-//=========stylesheet===========
+//=========stylesheet====================================================================
 //sourcemaps | sass | prefix | minimize | filesize
 gulp.task('build-css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
@@ -71,7 +73,7 @@ gulp.task('build-css',function(){
     .pipe(filesize());
 });
 
-//=======javascript========
+//=======javascript=================================================================
 //concat | jshint | filesize
 gulp.task('js', function(){
     return gulp.src([js_lib_src +'/**',js_src + '/**'])
@@ -94,7 +96,7 @@ gulp.task('build-js', function(){
         .pipe(filesize());
 });
 
-//========images========
+//========images=================================================================
 gulp.task('image', function(){
     return gulp.src(image_src + '/**')
     .pipe(imagemin({
@@ -105,8 +107,17 @@ gulp.task('image', function(){
     .pipe(gulp.dest(image_dest));
 });
 
-//========watch==========
+//========watch===================================================================
 gulp.task('watch',function(){
     gulp.watch(src + '/scss/**', ['build-css']);
     gulp.watch([src + 'lib/**/**', src + '/js**/**'],['js']);
+});
+
+
+//=========================================================
+//======TEST=========================================================
+//=========================================================
+//=========================================================
+gulp.task('testme', function(){
+    console.log("this is a test");
 });
