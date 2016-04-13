@@ -14,22 +14,27 @@ var
     imagemin        = require('gulp-imagemin'),
     pngquant        = require('imagemin-pngquant'),
     del             = require('del'),
-    args            = require('yargs').argv,
-    colors          = require('colors');
+    argv            = require('yargs').argv,
+    colors          = require('colors'),
+    gulpif          = require('gulp-if');
 
 //========options=========================================================
 var src         = "assets/dev",
     dest        = "assets/build",
     
+    //css locations
     css_file    = "global",
     css_src     = src + "/scss/" + css_file + ".scss",
+    css_watch   = src + "/scss/**/**",
     css_dest    = dest + "/css",
     
+    //js locations
     js_file     = "site.js",
     js_lib_src  = src + "/lib",
     js_src      = src + "/js",
     js_dest     = dest + "/js",
     
+    //image locations
     image_src   = src + "/img",
     image_dest  = dest + "/images";
 
@@ -41,11 +46,11 @@ gulp.task('default',['watch']);
 //=================================================================================
 gulp.task('help', function(){
     console.log("=============================================================".bold.green);
-    console.log("clean = delete contents of build folder".red);
-    console.log("build-css = sourcemaps | sass | prefix | minimize | filesize".cyan);
-    console.log("js = concat | jshint | filesize".yellow);
-    console.log("build-js = concat | sourcemaps | minimize | filesize".yellow);
-    console.log("images = optimize images and save to build dir".grey);
+    console.log("clean           = delete contents of build folder".red);
+    console.log("css             = sourcemaps | sass | prefix | minimize | filesize".cyan);
+    console.log("js              = concat | jshint | filesize".yellow);
+    console.log("js --production = concat | sourcemaps | minimize | filesize".yellow);
+    console.log("images          = optimize images and save to build dir".grey);
     console.log("watch (default) = build-css && js".bold.green);
     console.log("=============================================================".bold.yellow);
 });
@@ -59,9 +64,8 @@ gulp.task('clean', function(){
 
 //=========stylesheet====================================================================
 //sourcemaps | sass | prefix | minimize | filesize
-gulp.task('build-css',function(){
+gulp.task('css',function(){
     var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
-    //var build_processors = [csswring];
     return gulp.src(css_src)
     .pipe(sasslint())
     .pipe(sasslint.format())
@@ -75,23 +79,18 @@ gulp.task('build-css',function(){
 
 //=======javascript=================================================================
 //concat | jshint | filesize
+//(--production) concat | sourcemaps | minimize | filesize
 gulp.task('js', function(){
     return gulp.src([js_lib_src +'/**',js_src + '/**'])
         .pipe(concat(js_file))
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(gulp.dest(js_dest))
-        .pipe(filesize());
-});
+        
+        .pipe(gulpif(argv.production, filesize()))
+        .pipe(gulpif(argv.production, sourcemaps.init()))
+        .pipe(gulpif(argv.production, uglify()))
+        .pipe(gulpif(argv.production, sourcemaps.write()))
 
-//concat | sourcemaps | minimize | filesize
-gulp.task('build-js', function(){
-    return gulp.src([js_lib_src +'/**',js_src + '/**'])
-        .pipe(concat(js_file))
-        .pipe(filesize())
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
+        .pipe(gulpif(!argv.production, jshint.reporter('jshint-stylish')))
+        
         .pipe(gulp.dest(js_dest))
         .pipe(filesize());
 });
@@ -109,18 +108,18 @@ gulp.task('image', function(){
 
 //========watch===================================================================
 gulp.task('watch',function(){
-    gulp.watch(src + '/scss/**', ['build-css']);
-    gulp.watch([src + 'lib/**/**', src + '/js**/**'],['js']);
+    gulp.watch(css_watch, ['css']);
+    gulp.watch([js_lib_src + '/**/**', js_src + '/**/**'],['js']);
 });
-
-
 
 //======TEST=========================================================
 
 gulp.task('testme', function(){
     console.log("====| this is a test |====".bold.green);
 
-
+    if(argv.production){
+        console.log("let's do this");
+    }
 
     console.log("====| test complete! Hope it worked out :o) |====".bold.red);
 });
