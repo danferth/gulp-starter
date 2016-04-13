@@ -12,6 +12,7 @@
   "devDependencies": {
     "autoprefixer": "^6.3.5",
     "csswring": "^4.2.2",
+    "del": "^2.2.0",
     "es6-promise": "^3.1.2",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",

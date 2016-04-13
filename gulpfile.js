@@ -15,7 +15,8 @@ var
     jshint          = require('gulp-jshint'),
     sasslint        = require('gulp-sass-lint'),
     imagemin        = require('gulp-imagemin'),
-    pngquant        = require('imagemin-pngquant');
+    pngquant        = require('imagemin-pngquant'),
+    del             = require('del');
     
 
 //default task
@@ -73,7 +74,12 @@ gulp.task('image', function(){
     .pipe(gulp.dest(dest + "/images"))
 });
 
-
+//clean
+gulp.task('clean', function(){
+    return del([
+        dest + '/**/*'
+        ]);
+});
 
 
 
