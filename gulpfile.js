@@ -13,7 +13,8 @@ var
     sasslint        = require('gulp-sass-lint'),
     imagemin        = require('gulp-imagemin'),
     pngquant        = require('imagemin-pngquant'),
-    del             = require('del');
+    del             = require('del'),
+    args            = require('yargs').argv;
 
 //========options========
 var src         = "assets/dev",
