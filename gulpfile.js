@@ -1,5 +1,4 @@
-var Promise = require('es6-promise').Promise;
-var 
+var Promise         = require('es6-promise').Promise,
     gulp            = require('gulp'),
     colors          = require('colors'),
     filesize        = require('gulp-filesize'),
@@ -18,33 +17,27 @@ var
     jshint          = require('gulp-jshint'),
     imagemin        = require('gulp-imagemin'),
     pngquant        = require('imagemin-pngquant');
-
-//========options=========================================================
+//=======options==============================================================================
 var src         = "assets/dev",
     dest        = "assets/build",
-    
     //css locations
     css_file    = "global",
     css_src     = src + "/scss/" + css_file + ".scss",
     css_watch   = src + "/scss/**/**",
     css_dest    = dest + "/css",
-    
     //js locations
     js_file     = "site.js",
     js_lib_src  = src + "/lib",
     js_src      = src + "/js",
     js_dest     = dest + "/js",
-    
     //image locations
     image_src   = src + "/img",
     image_dest  = dest + "/images";
 
-//========default task=========================================================
+//=======default task=========================================================================
 gulp.task('default',['watch']);
 
-//=================================================================================
-//==========help===================================================================
-//=================================================================================
+//=======help=================================================================================
 gulp.task('help', function(){
   console.log("=============================================================".bold.green);
   console.log("clean              = delete contents of build folder".red);
@@ -58,14 +51,14 @@ gulp.task('help', function(){
   console.log("=============================================================".bold.yellow);
 });
 
-//clean
+//=======clean================================================================================
 gulp.task('clean', function(){
    return del([
       dest + '/**/*'
     ]);
 });
 
-//=========stylesheet====================================================================
+//=======stylesheet===========================================================================
 //sourcemaps | sass | prefix | minimize | filesize
 gulp.task('css',function(){
   var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
@@ -81,7 +74,7 @@ gulp.task('css',function(){
   .pipe(filesize());
 });
 
-//=======javascript=================================================================
+//=======javascript===========================================================================
 //concat | jshint | filesize
 //(--production) concat | sourcemaps | minimize | filesize
 gulp.task('js', function(){
@@ -99,7 +92,7 @@ gulp.task('js', function(){
   .pipe(filesize());
 });
 
-//========images=================================================================
+//=======images===============================================================================
 gulp.task('image', function(){
   return gulp.src(image_src + '/**')
   .pipe(imagemin({
@@ -110,11 +103,12 @@ gulp.task('image', function(){
   .pipe(gulp.dest(image_dest));
 });
 
-//========watch===================================================================
+//=======watch================================================================================
 gulp.task('watch',function(){
   gulp.watch(css_watch, ['css']);
   gulp.watch([js_lib_src + '/**/**', js_src + '/**/**'],['js']);
 });
 
-//=========BUILD========================================================
+//=======BUILD================================================================================
+//pass argument --production i.e. $ gulp build --production
 gulp.task('build',['css', 'js', 'image']);
