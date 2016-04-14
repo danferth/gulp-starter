@@ -19,6 +19,37 @@ build               = css, js & image
 build --production  = css, js --production & image
 =============================================================
 ```
+###Dependancies Used
+- es6-promise
+- gulp
+- colors
+- del
+- yargs
+- gulp-if
+- gulp-filesize
+- gulp-changed
+- gulp-sourcemaps
+- gulp-postcss
+- gulp-sass-lint
+- gulp-sass
+- autoprefixer
+- csswring
+- gulp-concat
+- jshint
+- gulp-jshint
+- jshint-stylish
+- gulp-uglify
+- gulp-imagemin
+- imagemin-pngquant
+ 
+##How to Use
 
+1. Fork or Download zip
+2. You will only need three files `gulpfile.js`, `package.json` & `.sass-lint.yml`.  Place those in your projects root directory.
+3. On your end install [`node`](https://docs.npmjs.com/getting-started/installing-node).
+4. run `$ npm install` to get all the dependancies installed.
+5. Edit variables section of `gulpfile.js` to set your projects `src` and `destination` directories.
+6. In `terminal` run `$ gulp help` to see a list of the tasks available.
+7. Edit as you see fit.
 
 *This is a work in progress and can always like everything get entirely out of hand to the point of being just to specific and too large to use as a starting point.  At that pint this project will just be abandoned as it will just be another attempt at reinventing the wheel.*
