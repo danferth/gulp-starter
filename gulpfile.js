@@ -116,18 +116,5 @@ gulp.task('watch',function(){
   gulp.watch([js_lib_src + '/**/**', js_src + '/**/**'],['js']);
 });
 
-
-
 //=========BUILD========================================================
 gulp.task('build',['css', 'js', 'image']);
-//======TEST=========================================================
-
-gulp.task('testme', function(){
-  console.log("====| this is a test |====".bold.green);
-
-  if(argv.production){
-    console.log("let's do this");
-  }
-
-  console.log("====| test complete! Hope it worked out :o) |====".bold.red);
-});
