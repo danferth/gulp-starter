@@ -34,6 +34,13 @@ var src         = "assets/dev",
     image_src   = src + "/img",
     image_dest  = dest + "/images";
 
+
+gulp.task('start',function(){
+  //build file structure to start project. use variables above to create structure.
+  //will need nom dirp plugin for this
+});
+
+
 //=======default task=========================================================================
 gulp.task('default',['watch']);
 
