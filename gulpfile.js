@@ -16,7 +16,8 @@ var Promise         = require('es6-promise').Promise,
     uglify          = require('gulp-uglify'),
     jshint          = require('gulp-jshint'),
     imagemin        = require('gulp-imagemin'),
-    pngquant        = require('imagemin-pngquant');
+    pngquant        = require('imagemin-pngquant'),
+    mkdirp          = require('mkdirp');
 //=======options==============================================================================
 var src         = "assets/dev",
     dest        = "assets/build",
@@ -34,10 +35,23 @@ var src         = "assets/dev",
     image_src   = src + "/img",
     image_dest  = dest + "/images";
 
+//=======Start================================================================================
+//this is working to create directories but i need files too so check this out in the morning:
+//https://www.npmjs.com/package/create-file
 
-gulp.task('start',function(){
-  //build file structure to start project. use variables above to create structure.
-  //will need nom dirp plugin for this
+gulp.task('start', function(){
+  mkdirp('assets/build', function(err){
+    (err) ? console.log(err) : console.log("Build passed");
+  });
+  mkdirp('assets/build/js', function(err){
+    (err) ? console.log(err) : console.log("js passed");
+  });
+  mkdirp('assets/build/css', function(err){
+    (err) ? console.log(err) : console.log("css passed");
+  });
+  mkdirp('assets/build/img', function(err){
+    (err) ? console.log(err) : console.log("now get to work!".bold.green);
+  });
 });
 
 
