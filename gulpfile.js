@@ -17,7 +17,8 @@ var Promise         = require('es6-promise').Promise,
     jshint          = require('gulp-jshint'),
     imagemin        = require('gulp-imagemin'),
     pngquant        = require('imagemin-pngquant'),
-    mkdirp          = require('mkdirp');
+    mkdirp          = require('mkdirp'),
+    createFile      = require('create-file');
 //=======options==============================================================================
 var src         = "assets/dev",
     dest        = "assets/build",
@@ -51,6 +52,12 @@ gulp.task('start', function(){
   });
   mkdirp('assets/build/img', function(err){
     (err) ? console.log(err) : console.log("now get to work!".bold.green);
+  });
+});
+
+gulp.task('create', function(){
+  createFile(js_src + '/test.js', '//this is a comment yo!', function(err){
+    (err) ? console.log(err) : console.log("js file created".yellow);
   });
 });
 
