@@ -24,8 +24,7 @@ var src         = "assets/dev",
     dest        = "assets/build",
     //css locations
     css_file    = "global.scss",
-    css_src     = src + "/scss/",
-    css_watch   = src + "/scss/**/**",
+    css_src     = src + "/scss",
     css_dest    = dest + "/css",
     //js locations
     js_file     = "site.js",
@@ -37,9 +36,6 @@ var src         = "assets/dev",
     image_dest  = dest + "/img";
 
 //=======Start================================================================================
-//this is working to create directories but i need files too so check this out in the morning:
-//https://www.npmjs.com/package/create-file
-
 gulp.task('create-build-dir', function(){
   mkdirp('assets/build', function(err){
     (err) ? console.log(err) : console.log("Build passed".green);
@@ -56,7 +52,7 @@ gulp.task('create-build-dir', function(){
 });
 
 gulp.task('create-dev-dir', function(){
-  createFile(js_src + '/' + js_file, '//this is a comment yo!', function(err){
+  createFile(js_src + '/' + js_file, '//site js here. Lib js concatenated above this file', function(err){
     (err) ? console.log(err) : console.log("js file created".yellow);
   });
   createFile(css_src + '/' + css_file, '//start styling!', function(err){
@@ -68,9 +64,7 @@ gulp.task('create-dev-dir', function(){
   mkdirp(image_src, function(err){
     (err) ? console.log(err) : console.log('src img directory created'.yellow);
   });
-  
 });
-
 
 //=======default task=========================================================================
 gulp.task('default',['watch']);
