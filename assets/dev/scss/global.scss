@@ -1,14 +1,7 @@
-//this file is only for testing out the script
-@import 'main';
-//global scss
+//start styling!
+
+*{box-sizing:border-box};
 h1{
-    color:olive;
-    font:bold 40px sans-serif;
-    background:rgba(olive,.2);
-    padding:3rem;
-    text-transform:uppercase;
-}
-p{
-    margin:0 2rem;
-    color:darken($white,90%);
+    color:black;
+    margin:0 auto;
 }

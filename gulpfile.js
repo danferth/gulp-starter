@@ -23,8 +23,8 @@ var Promise         = require('es6-promise').Promise,
 var src         = "assets/dev",
     dest        = "assets/build",
     //css locations
-    css_file    = "global",
-    css_src     = src + "/scss/" + css_file + ".scss",
+    css_file    = "global.scss",
+    css_src     = src + "/scss/",
     css_watch   = src + "/scss/**/**",
     css_dest    = dest + "/css",
     //js locations
@@ -34,31 +34,41 @@ var src         = "assets/dev",
     js_dest     = dest + "/js",
     //image locations
     image_src   = src + "/img",
-    image_dest  = dest + "/images";
+    image_dest  = dest + "/img";
 
 //=======Start================================================================================
 //this is working to create directories but i need files too so check this out in the morning:
 //https://www.npmjs.com/package/create-file
 
-gulp.task('start', function(){
+gulp.task('create-build-dir', function(){
   mkdirp('assets/build', function(err){
-    (err) ? console.log(err) : console.log("Build passed");
+    (err) ? console.log(err) : console.log("Build passed".green);
   });
   mkdirp('assets/build/js', function(err){
-    (err) ? console.log(err) : console.log("js passed");
+    (err) ? console.log(err) : console.log("js passed".green);
   });
   mkdirp('assets/build/css', function(err){
-    (err) ? console.log(err) : console.log("css passed");
+    (err) ? console.log(err) : console.log("css passed".green);
   });
   mkdirp('assets/build/img', function(err){
-    (err) ? console.log(err) : console.log("now get to work!".bold.green);
+    (err) ? console.log(err) : console.log("now get to work!".green);
   });
 });
 
-gulp.task('create', function(){
-  createFile(js_src + '/test.js', '//this is a comment yo!', function(err){
+gulp.task('create-dev-dir', function(){
+  createFile(js_src + '/' + js_file, '//this is a comment yo!', function(err){
     (err) ? console.log(err) : console.log("js file created".yellow);
   });
+  createFile(css_src + '/' + css_file, '//start styling!', function(err){
+    (err) ? console.log(err) : console.log("scss file created".yellow);
+  });
+  mkdirp(js_lib_src, function(err){
+    (err) ? console.log(err) : console.log('js lib directory created'.yellow);
+  });
+  mkdirp(image_src, function(err){
+    (err) ? console.log(err) : console.log('src img directory created'.yellow);
+  });
+  
 });
 
 
@@ -90,7 +100,7 @@ gulp.task('clean', function(){
 //sourcemaps | sass | prefix | minimize | filesize
 gulp.task('css',function(){
   var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
-  return gulp.src(css_src)
+  return gulp.src(css_src + css_file)
   .pipe(changed(css_dest))
   .pipe(sasslint())
   .pipe(sasslint.format())
@@ -133,7 +143,7 @@ gulp.task('image', function(){
 
 //=======watch================================================================================
 gulp.task('watch',function(){
-  gulp.watch(css_watch, ['css']);
+  gulp.watch(css_src + '/**/**', ['css']);
   gulp.watch([js_lib_src + '/**/**', js_src + '/**/**'],['js']);
 });
 
