@@ -22,6 +22,7 @@ build --production  = css, js --production & image
 ```
 ###Dependencies Used
 
+|---------------------------|-----------------------------------------------|
 |**es6-promise**            |*for node to work*                             |
 |**gulp**                   |*need gulp of course*                          |
 |**colors**                 |*added for pretty console.log*                 |
