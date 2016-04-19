@@ -8,7 +8,8 @@ To have a `gulpfile.js` & `package.json` that can be added to any project to get
 **use `$ gulp help` to see a printout of the tasks available to you.**
 
 ```
-=============================================================
+==========================================================================
+start               = create 'build' & 'dev' directories and files
 clean               = delete contents of build folder
 css                 = sourcemaps | sass | prefix | minimize | filesize
 js                  = concat | jshint | filesize
@@ -17,11 +18,10 @@ image               = optimize images and save to build dir
 watch (default)     = css && js
 build               = css, js & image
 build --production  = css, js --production & image
-=============================================================
+==========================================================================
 ```
 ###Dependencies Used
-|Dependency                 |Needed For                                     |
-|---------------------------|-----------------------------------------------|
+
 |**es6-promise**            |*for node to work*                             |
 |**gulp**                   |*need gulp of course*                          |
 |**colors**                 |*added for pretty console.log*                 |
