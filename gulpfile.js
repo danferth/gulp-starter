@@ -37,22 +37,19 @@ var src         = "assets/dev",
 
 //=======Start================================================================================
 gulp.task('create-build-dir', function(){
-  mkdirp('assets/build', function(err){
-    (err) ? console.log(err) : console.log("Build passed".green);
-  });
   mkdirp('assets/build/js', function(err){
-    (err) ? console.log(err) : console.log("js passed".green);
+    (err) ? console.log(err) : console.log("js folder created".green);
   });
   mkdirp('assets/build/css', function(err){
-    (err) ? console.log(err) : console.log("css passed".green);
+    (err) ? console.log(err) : console.log("css folder created".green);
   });
   mkdirp('assets/build/img', function(err){
-    (err) ? console.log(err) : console.log("now get to work!".green);
+    (err) ? console.log(err) : console.log("img folder created".green);
   });
 });
 
 gulp.task('create-dev-dir', function(){
-  createFile(js_src + '/' + js_file, '//site js here. Lib js concatenated above this file', function(err){
+  createFile(js_src + '/' + js_file, '//site js here. Lib js files concatenated above this file', function(err){
     (err) ? console.log(err) : console.log("js file created".yellow);
   });
   createFile(css_src + '/' + css_file, '//start styling!', function(err){
@@ -66,12 +63,16 @@ gulp.task('create-dev-dir', function(){
   });
 });
 
+//=======build file structure=================================================================
+gulp.task('start', ['create-build-dir','create-dev-dir']);
+
 //=======default task=========================================================================
 gulp.task('default',['watch']);
 
 //=======help=================================================================================
 gulp.task('help', function(){
   console.log("=============================================================".bold.green);
+  console.log("start              = create 'build' & 'dev' directories".white);
   console.log("clean              = delete contents of build folder".red);
   console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
   console.log("js                 = concat | jshint | filesize".yellow);
