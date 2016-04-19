@@ -23,7 +23,7 @@ var Promise         = require('es6-promise').Promise,
 var src         = "assets/dev",
     dest        = "assets/build",
     //css locations
-    css_file    = "global.scss",
+    css_file    = "global",
     css_src     = src + "/scss",
     css_dest    = dest + "/css",
     //js locations
@@ -66,6 +66,13 @@ gulp.task('create-dev-dir', function(){
 //=======build file structure=================================================================
 gulp.task('start', ['create-build-dir','create-dev-dir']);
 
+//=======Create index.html====================================================================
+gulp.task('create-index', function(){
+  createFile('index.html',html_content, function(err){
+    (err) ? console.log(err) : console.log("index.html has been created".yellow);
+  });
+});
+
 //=======default task=========================================================================
 gulp.task('default',['watch']);
 
@@ -95,7 +102,7 @@ gulp.task('clean', function(){
 //sourcemaps | sass | prefix | minimize | filesize
 gulp.task('css',function(){
   var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
-  return gulp.src(css_src + css_file)
+  return gulp.src(css_src + css_file + '.scss')
   .pipe(changed(css_dest))
   .pipe(sasslint())
   .pipe(sasslint.format())
@@ -145,3 +152,5 @@ gulp.task('watch',function(){
 //=======BUILD================================================================================
 //pass argument --production i.e. $ gulp build --production
 gulp.task('build',['css', 'js', 'image']);
+
+var html_content = "<!doctype html>\n<html lang='en'>\n<head>\n\t<meta charset='UTF-8'>\n\t<meta name='viewport' content='width=device-width, initial-scale=1'>\n\t<title></title>\n\t<link rel='stylesheet' href='" + css_dest + "/" + css_file + ".css' type='text/css' />\n</head>\n<body>\n\n\n\t<script type='text/javascript' src='" + js_dest + "/" + js_file + "'></script> \n</body>\n</html>\n";
