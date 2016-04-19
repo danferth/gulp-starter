@@ -10,6 +10,7 @@ To have a `gulpfile.js` & `package.json` that can be added to any project to get
 ```
 ==========================================================================
 start               = create 'build' & 'dev' directories and files
+create-index        = creates index.html with css and js links
 clean               = delete contents of build folder
 css                 = sourcemaps | sass | prefix | minimize | filesize
 js                  = concat | jshint | filesize

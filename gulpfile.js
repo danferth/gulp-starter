@@ -80,6 +80,7 @@ gulp.task('default',['watch']);
 gulp.task('help', function(){
   console.log("=============================================================".bold.green);
   console.log("start              = create 'build' & 'dev' directories".white);
+  console.log("create-index       = creates index.html file with css and js links");
   console.log("clean              = delete contents of build folder".red);
   console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
   console.log("js                 = concat | jshint | filesize".yellow);
