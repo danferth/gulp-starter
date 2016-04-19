@@ -20,28 +20,33 @@ build --production  = css, js --production & image
 =============================================================
 ```
 ###Dependencies Used
-- **es6-promise** *(for node to work)*
-- **gulp** *(need gulp of course)*
-- **colors** *(added for pretty console.log)*
-- **del** *(to clean build directory)*
-- **yargs** *(for arguments in command line)*
-- **gulp-if** *(for conditionals in task)*
-- **gulp-filesize** *(to report file size)*
-- **gulp-changed** *(to only pass changed files down stream)*
-- **gulp-sourcemaps** *(for sourcemaps)*
-- **gulp-postcss** *(proccess css)*
-- **gulp-sass-lint** *(lint scss)*
-- **gulp-sass** *(compile scss to css)*
-- **autoprefixer** *(add prefixes)*
-- **csswring** *(mimify css)*
-- **gulp-concat** *(concatinate js files)*
-- **jshint** *(needed for gulp-jshint)*
-- **gulp-jshint** *(hints on js errors)*
-- **jshint-stylish** *(style output from gulp-jshint)*
-- **gulp-uglify** *(mimify js)*
-- **gulp-imagemin** *(image optimization for jpeg & svg)*
-- **imagemin-pngquant** *(image optimization for png images)*
- 
+|Dependency                 |Needed For                                     |
+|---------------------------|-----------------------------------------------|
+|**es6-promise**            |*for node to work*                             |
+|**gulp**                   |*need gulp of course*                          |
+|**colors**                 |*added for pretty console.log*                 |
+|**del**                    |*to clean build directory*                     |
+|**yargs**                  |*for arguments in command line*                |
+|**gulp-if**                |*for conditionals in task*                     |
+|**gulp-filesize**          |*to report file size*                          |
+|**gulp-changed**           |*to only pass changed files down stream*       |
+|**gulp-sourcemaps**        |*for sourcemaps*                               |
+|**gulp-postcss**           |*proccess css*                                 |
+|**gulp-sass-lint**         |*lint scss*                                    |
+|**gulp-sass**              |*compile scss to css*                          |
+|**autoprefixer**           |*add prefixes*                                 |
+|**csswring**               |*mimify css*                                   |
+|**gulp-concat**            |*concatinate js files*                         |
+|**jshint**                 |*needed for gulp-jshint*                       |
+|**gulp-jshint**            |*hints on js errors*                           |
+|**jshint-stylish**         |*style output from gulp-jshint*                |
+|**gulp-uglify**            |*mimify js*                                    |
+|**gulp-imagemin**          |*image optimization for jpeg & svg*            |
+|**imagemin-pngquant**      |*image optimization for png images*            |
+|**mkdirp**                 |*creates directories and parent directories*   |
+|**create-file**            |*creates and writes to files*                  |
+
+
 ##How to Use
 
 1. Fork or Download zip
