@@ -22,7 +22,7 @@ build --production  = css, js --production & image
 ```
 ##How to Use
 
-1. Fork or Download zip
+1. Fork or [Download zip](https://github.com/danferth/gulp-starter/archive/master.zip)
 2. You will only need three files `gulpfile.js`, `package.json` & `.sass-lint.yml`.  Place those in your projects root directory.
 3. On your end install [`node`](https://docs.npmjs.com/getting-started/installing-node).
 4. run `$ npm install` to get all the dependencies installed.
