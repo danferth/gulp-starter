@@ -27,7 +27,7 @@ var src         = "assets/dev",
     css_src     = src + "/scss",
     css_dest    = dest + "/css",
     //js locations
-    js_file     = "site.js",
+    js_file     = "site",
     js_lib_src  = src + "/lib",
     js_src      = src + "/js",
     js_dest     = dest + "/js",
@@ -49,10 +49,10 @@ gulp.task('create-build-dir', function(){
 });
 
 gulp.task('create-dev-dir', function(){
-  createFile(js_src + '/' + js_file, '//site js here. Lib js files concatenated above this file', function(err){
+  createFile(js_src + '/' + js_file + '.js', '//site js here. Lib js files concatenated above this file', function(err){
     (err) ? console.log(err) : console.log("js file created".yellow);
   });
-  createFile(css_src + '/' + css_file, '//start styling!', function(err){
+  createFile(css_src + '/' + css_file + '.scss', '//start styling!', function(err){
     (err) ? console.log(err) : console.log("scss file created".yellow);
   });
   mkdirp(js_lib_src, function(err){
@@ -121,7 +121,7 @@ gulp.task('css',function(){
 gulp.task('js', function(){
   return gulp.src([js_lib_src +'/**',js_src + '/**'])
   .pipe(changed(js_dest))
-  .pipe(concat(js_file))
+  .pipe(concat(js_file + '.js'))
   
   .pipe(gulpif(argv.production, filesize()))
   .pipe(gulpif(argv.production, sourcemaps.init()))
