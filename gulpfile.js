@@ -103,7 +103,7 @@ gulp.task('clean', function(){
 //sourcemaps | sass | prefix | minimize | filesize
 gulp.task('css',function(){
   var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
-  return gulp.src(css_src + css_file + '.scss')
+  return gulp.src(css_src + '/' +css_file + '.scss')
   .pipe(changed(css_dest))
   .pipe(sasslint())
   .pipe(sasslint.format())
