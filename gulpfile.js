@@ -127,8 +127,9 @@ gulp.task('js', function(){
   .pipe(gulpif(argv.production, sourcemaps.init()))
   .pipe(gulpif(argv.production, uglify()))
   .pipe(gulpif(argv.production, sourcemaps.write()))
-  .pipe(gulpif(!argv.production, jshint.reporter('jshint-stylish')))
   
+  .pipe(jshint())
+  .pipe(jshint.reporter('jshint-stylish'))
   .pipe(gulp.dest(js_dest))
   .pipe(filesize());
 });
