@@ -5,7 +5,6 @@ var Promise         = require('es6-promise').Promise,
     del             = require('del'),
     argv            = require('yargs').argv,
     gulpif          = require('gulp-if'),
-    changed         = require('gulp-changed'),
     sourcemaps      = require('gulp-sourcemaps'),
     postcss         = require('gulp-postcss'),
     sass            = require('gulp-sass'),
@@ -104,7 +103,6 @@ gulp.task('clean', function(){
 gulp.task('css',function(){
   var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
   return gulp.src(css_src + '/' +css_file + '.scss')
-  .pipe(changed(css_dest))
   .pipe(sasslint())
   .pipe(sasslint.format())
   .pipe(sourcemaps.init())
@@ -119,8 +117,7 @@ gulp.task('css',function(){
 //concat | jshint | filesize
 //(--production) concat | sourcemaps | minimize | filesize
 gulp.task('js', function(){
-  return gulp.src([js_lib_src +'/**',js_src + '/**'])
-  .pipe(changed(js_dest))
+  return gulp.src([js_lib_src +'/**/**', js_src + '/*.js'])
   .pipe(concat(js_file + '.js'))
   
   .pipe(gulpif(argv.production, filesize()))
@@ -145,6 +142,11 @@ gulp.task('image', function(){
   .pipe(gulp.dest(image_dest));
 });
 
+//=======copy files===========================================================================
+gulp.task('copy', function(){
+  return gulp.src(src + "/" + argv.src + "/**")
+  .pipe(gulp.dest(dest + "/" + argv.src))
+});
 //=======watch================================================================================
 gulp.task('watch',function(){
   gulp.watch(css_src + '/**/**', ['css']);
