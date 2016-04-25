@@ -12,6 +12,7 @@ To have a `gulpfile.js` & `package.json` that can be added to any project to get
 start               = create 'build' & 'dev' directories and files
 create-index        = creates index.html with css and js links
 clean               = delete contents of build folder
+copy --src folder   = copy folder from dev to build (fonts, json...)
 css                 = sourcemaps | sass | prefix | minimize | filesize
 js                  = concat | jshint | filesize
 js --production     = concat | sourcemaps | minimize | filesize
